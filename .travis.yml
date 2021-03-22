@@ -7,7 +7,8 @@ before_install:
   - docker build -t killthebee/client-test -f ./clientt/Dockerfile.dev ./clientt
 
 script:
-  - docker run -e CI=true killthebee/client-test npm run test
+  - chmod a+x /usr/src/app/node_modules/.bin/react-scripts
+  - docker run -e CI=true killthebee/client-test npm test
 
 after_succes:
   - docker build -t killthebee/complex-client ./clientt

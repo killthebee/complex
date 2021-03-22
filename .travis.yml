@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t killthebee/client-test -f ./clientt/Dockerfile.dev ./clientt
+
+script:
+  - docker run -e CI=true killthebee/client-test npm test
+
+after_succes:
+  - docker build -t killthebee/complex-client ./clientt
+  - docker build -t killthebee/complex-nginx ./nginx
+  - docker build -t killthebee/complex-server ./server
+  - docker build -t killthebee/complex-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push killthebee/complex-client
+  - docker push killthebee/complex-nginx
+  - docker push killthebee/complex-server
+  - docker push killthebee/complex-worker

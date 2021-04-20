@@ -3,6 +3,7 @@ WORKDIR '/app'
 COPY package.json .
 RUN npm install
 COPY . .
+RUN chmod a+x node_modules/.bin/react-scripts
 RUN npm run build
 
 FROM nginx

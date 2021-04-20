@@ -3,5 +3,5 @@ WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
 COPY . .
-RUN chmod a+x /usr/src/app/node_modules/.bin/react-scripts
+RUN chmod a+x node_modules/.bin/react-scripts
 CMD ["npm", "run", "start"]

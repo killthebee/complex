@@ -14,7 +14,7 @@ after_succes:
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push killthebee/complex-clientt
+  - docker push killthebee/complex-client
   - docker push killthebee/complex-nginx
   - docker push killthebee/complex-server
   - docker push killthebee/complex-worker
